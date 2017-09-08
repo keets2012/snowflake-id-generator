@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: generator-aoho-${spring.profiles.active:default}
+
+generate:
+  worker: 1021
+
+---
+server:
+  port: 9090
