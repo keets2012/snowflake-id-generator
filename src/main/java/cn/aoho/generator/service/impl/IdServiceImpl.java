@@ -4,15 +4,11 @@ import cn.aoho.generator.entity.IdEntity;
 import cn.aoho.generator.entity.IdMeta;
 import cn.aoho.generator.service.IdConverter;
 import cn.aoho.generator.service.IdService;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @Slf4j
-@Data
-@Service
 public class IdServiceImpl implements IdService {
     // 上一毫秒数
     private static long lastTimestamp = -1L;

@@ -1,5 +1,6 @@
 package cn.aoho.generator.service.impl;
 
+import cn.aoho.generator.service.SnowflakeId;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  * 优点是：整体上按照时间自增排序，且整个分布式系统内不会产生ID碰撞(由数据中心ID和机器ID作区分)
  */
 @Slf4j
-public class SnowflakeIdWorker {
+public class SnowflakeIdWorker implements SnowflakeId {
     //开始时间截 (从2015-01-01起)
     private static final long START_TIME = 1420041600000L;
     // 机器ID所占位数
@@ -68,6 +69,7 @@ public class SnowflakeIdWorker {
      *
      * @return id
      */
+    @Override
     public synchronized long nextId() {
         long timestamp = timeGen();
 

@@ -3,13 +3,7 @@ package cn.aoho.generator.service.impl;
 import cn.aoho.generator.entity.IdEntity;
 import cn.aoho.generator.entity.IdMeta;
 import cn.aoho.generator.service.IdConverter;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Data
-@NoArgsConstructor
-@Service
 public class IdConverterImpl implements IdConverter {
     public long convert(IdEntity id) {
         long ret = 0;
