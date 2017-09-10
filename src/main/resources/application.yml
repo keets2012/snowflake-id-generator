@@ -1,0 +1,18 @@
+####################### swagger starter info ###########################
+swagger:
+  enabled: true
+  title: spring-boot-id-generate
+  config-id: id-generate
+  version: v2
+  license: Apache License, Version 2.0
+  licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfServiceUrl: https://git.oschina.net/keets/snowflake-id-generator
+  contact: aoho002@gmail.com
+  base-path: /**
+  resource-package: cn.aoho.generator.rest
+
+
+####################### generate info ###########################
+generate:
+  origin: false  #是否启用原生的snowflake
+  worker: 1001

@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -22,8 +21,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Api(value = "/")
-@RestController
 @Slf4j
+@Path(value = "/MyId")
 public class IdResource {
 
     @Autowired
