@@ -45,18 +45,14 @@ uuid全球唯一，本地生成，没有网络消耗，产生的性能绝对可�
 
 >采用一主两从的方式，同时分机房部署，Master和Slave之间采用半同步方式同步数据。同时使用DBProxy做主从切换。当然这种方案在一些情况会退化成异步模式，甚至在非常极端情况下仍然会造成数据不一致的情况，但是出现的概率非常小。
 
-![主从][ms] 
-
-[ms]:http://ovci9bs39.bkt.clouddn.com/master-slave.png "主从方式"
+![主从](http://ovci9bs39.bkt.clouddn.com/master-slave.png "主从方式")
 
 ## 3. snowflake方案
 ### 3.1 介绍
 考虑到上述方案的缺陷，笔者调查了其他的生成方案，snowflake就是其中一种方案。   
 趋势递增和不够随机的问题，在snowflake完全可以解决，Snowflake ID有64bits长，由以下三部分组成：
 
-![snowflake][sw]
-
-[sw]:http://ovci9bs39.bkt.clouddn.com/snowflake-64bit.jpg "snowflake"
+![snowflake](http://ovci9bs39.bkt.clouddn.com/snowflake-64bit.jpg "snowflake")
 
 1. 第一位为0，不用。
 2. timestamp—41bits,精确到ms，那就意味着其可以表示长达(2^41-1)/(1000360024*365)=139.5年，另外使用者可以自己定义一个开始纪元（epoch)，然后用(当前时间-开始纪元）算出time，这表示在time这个部分在140年的时间里是不会重复的，官方文档在这里写成了41bits，应该是写错了。另外，这里用time还有一个很重要的原因，就是可以直接更具time进行排序，对于twitter这种更新频繁的应用，时间排序就显得尤为重要了。
