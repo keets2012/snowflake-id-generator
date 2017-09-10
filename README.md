@@ -44,14 +44,18 @@ uuid全球唯一，本地生成，没有网络消耗，产生的性能绝对可�
 
 >采用一主两从的方式，同时分机房部署，Master和Slave之间采用半同步方式同步数据。同时使用DBProxy做主从切换。当然这种方案在一些情况会退化成异步模式，甚至在非常极端情况下仍然会造成数据不一致的情况，但是出现的概率非常小。
 
-![主从][ms]
+
+![主从][ms] 
+  
 [ms]:http://ovci9bs39.bkt.clouddn.com/master-slave.png "主从方式"
 
 ## 3. snowflake方案
 ### 3.1 介绍
 考虑到上述方案的缺陷，笔者调查了其他的生成方案，snowflake就是其中一种方案。   
 趋势递增和不够随机的问题，在snowflake完全可以解决，Snowflake ID有64bits长，由以下三部分组成：
+
 ![snowflake][sw]
+   
 [sw]:http://ovci9bs39.bkt.clouddn.com/snowflake-64bit.jpg "snowflake"
 
 1. 第一位为0，不用。
