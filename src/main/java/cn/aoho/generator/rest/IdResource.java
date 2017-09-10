@@ -20,9 +20,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * Created by keets on 2017/9/9.
+ */
+
 @Api(value = "/")
 @Slf4j
-@Path(value = "/MyId")
+@Path(value = "/api")
 public class IdResource {
 
     @Autowired

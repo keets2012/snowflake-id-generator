@@ -4,6 +4,9 @@ import cn.aoho.generator.entity.IdEntity;
 import cn.aoho.generator.entity.IdMeta;
 import cn.aoho.generator.service.IdConverter;
 
+/**
+ * Created by keets on 2017/9/9.
+ */
 public class IdConverterImpl implements IdConverter {
     public long convert(IdEntity id) {
         long ret = 0;

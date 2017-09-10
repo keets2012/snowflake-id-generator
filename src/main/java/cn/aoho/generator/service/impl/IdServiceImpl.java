@@ -11,6 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 
+/**
+ * Created by keets on 2017/9/9.
+ */
+
 @Slf4j
 public class IdServiceImpl implements IdService {
     // 上一毫秒数

@@ -9,7 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 /**
- * Created by keets on 2017/6/28.
+ * Created by keets on 2017/8/28.
  */
 @ApiModel(value = "生成ID所需的参数")
 @Data

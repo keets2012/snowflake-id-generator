@@ -1,7 +1,7 @@
 package cn.aoho.generator.entity;
 
 /**
- * Created by keets on 2017/6/28.
+ * Created by keets on 2017/8/28.
  */
 public class IdMeta {
     //开始时间截 (从2015-01-01起)
