@@ -1,4 +1,5 @@
 # snowflake升级版全局id生成
+
 ## 1. 背景
 分布式系统或者微服务架构基本都采用了分库分表的设计，全局唯一id生成的需求变得很迫切。   
 传统的单体应用，使用单库，数据库中自增id可以很方便实现。分库之后，首先需要分库键，分库键必然不能重复，所以传统的做法并不能满足需求。概括下来，那业务系统对ID号的要求有哪些呢？
@@ -158,6 +159,15 @@ validateTimestamp:
         return ((timestamp - idMeta.START_TIME) << idMeta.TIMESTAMP_LEFT_SHIFT_BITS) | (workerId << idMeta.ID_SHIFT_BITS) | sequence;
     }
 ```
+
+**本文的源码地址：   
+GitHub：https://github.com/keets2012/snowflake-id-generator      
+码云： https://gitee.com/keets/snowflake-id-generator**
+
+### 订阅最新文章，欢迎关注我的公众号
+
+![微信公众号](http://ovci9bs39.bkt.clouddn.com/qrcode_for_gh_ca56415d4966_430.jpg)
+
 
 ----
 参考：   
