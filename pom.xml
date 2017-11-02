@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>cloud-parent</artifactId>
-        <groupId>cn.aoho</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.2.RELEASE</version>
     </parent>
 
+    <groupId>com.blueskykong</groupId>
     <artifactId>snowflake-id-generate</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -27,11 +28,15 @@
         <developer>
             <name>aoho</name>
             <email>aoho002@gmail.com</email>
-            <organization>http://hacloud.club</organization>
+            <organization>http://blueskykong.com</organization>
         </developer>
     </developers>
 
     <properties>
+        <maven.docker.version>0.4.14</maven.docker.version>
+        <docker.image.prefix>192.168.1.202/library</docker.image.prefix>
+        <!--set the following false to make images-->
+        <docker.skip.build>true</docker.skip.build>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.8</version.java>
         <swageger.jsersey.version>1.0.0-SNAPSHOT</swageger.jsersey.version>
@@ -98,14 +103,24 @@
 
         <!--swagger starter-->
         <dependency>
-            <groupId>cn.keets</groupId>
+            <groupId>club.hacloud</groupId>
             <artifactId>jersey-starter-swagger</artifactId>
-            <version>1.0.0.RELEASE</version>
+            <version>${swageger.jsersey.version}</version>
         </dependency>
-
-
     </dependencies>
 
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
@@ -113,10 +128,53 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!--<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-            </plugin>-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${maven.docker.version}</version>
+                <!--插件绑定到phase-->
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--配置变量，包括是否build、imageName、imageTag，非常灵活-->
+                    <skipDocker>${docker.skip.build}</skipDocker>
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <!--最后镜像产生了两个tag，版本和和最新的-->
+                    <imageTags>
+                        <imageTag>${project.version}</imageTag>
+                        <imageTag>latest</imageTag>
+                    </imageTags>
+                    <forceTags>true</forceTags>
+                    <!--<baseImage>java:8</baseImage>-->
+                    <!--时区配置-->
+                    <env>
+                        <TZ>Asia/Shanghai</TZ>
+                    </env>
+                    <runs>
+                        <run>ln -snf /usr/share/zoneinfo/$TZ /etc/localtime</run>
+                        <run>echo $TZ > /etc/timezone</run>
+                        <run>wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh</run>
+                        <run>chmod 777 wait-for-it.sh</run>
+                    </runs>
+                    <!--<entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>-->
+                    <dockerDirectory>${project.basedir}</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <!--push到私有的hub-->
+                    <serverId>docker-registry</serverId>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
