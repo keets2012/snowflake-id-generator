@@ -168,7 +168,7 @@ GitHub：https://github.com/keets2012/snowflake-id-generator
 
 ### 订阅最新文章，欢迎关注我的公众号
 
-![微信公众号](http://ovci9bs39.bkt.clouddn.com/qrcode_for_gh_ca56415d4966_430.jpg)
+![微信公众号](http://image.blueskykong.com/wechat-public-code.jpg)
 
 
 ----
